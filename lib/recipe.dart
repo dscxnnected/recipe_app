@@ -1,26 +1,37 @@
-class Recipe {
-  String? name;
-  String? description;
-  bool? isVegan;
-  bool? isVegetarian;
-  int? servings;
-  int? cookTime;
-  int? prepTime;
-  List<String>? instructions;
-  List<String>? ingredients;
+import 'package:flutter/cupertino.dart';
 
-  Recipe(this.name, this.description, this.isVegan, this.isVegetarian, this.servings, this.cookTime, this.prepTime, this.instructions, this.ingredients);
+class Recipe {
+  String name = '';
+  String description = '';
+  bool isVegan = false;
+  bool isVegetarian = false;
+  int servings = 0;
+  int cookTime = 0;
+  int prepTime = 0;
+  //List<String> instructions = <String>[];
+  //List<String>? ingredients;
+
+  Recipe({
+    required this.name,
+    required this.description,
+    required this.isVegan,
+    required this.isVegetarian,
+    required this.servings,
+    required this.cookTime,
+    required this.prepTime,
+    /*this.instructions, this.ingredients*/
+  });
 
   Recipe.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+    name = json['title'];
     description = json['description'];
     isVegan = json['isVegan'];
     isVegetarian = json['isVegetarian'];
     servings = json['servings'];
     cookTime = json['cookTime'];
     prepTime = json['prepTime'];
-    instructions = json['instructions'];
-    ingredients = json['ingredients'];
+    //instructions = json['instructions'];
+    //ingredients = json['ingredients'];
   }
 
 }
