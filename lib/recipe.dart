@@ -8,8 +8,8 @@ class Recipe {
   int servings = 0;
   int cookTime = 0;
   int prepTime = 0;
-  //List<String> instructions = <String>[];
-  //List<String>? ingredients;
+  List<String> ingredients = <String>[];
+  List<String> instructions = <String>[];
 
   Recipe({
     required this.name,
@@ -19,10 +19,12 @@ class Recipe {
     required this.servings,
     required this.cookTime,
     required this.prepTime,
-    /*this.instructions, this.ingredients*/
+    required this.ingredients,
+    required this.instructions
   });
 
   Recipe.fromJson(Map<String, dynamic> json) {
+
     name = json['title'];
     description = json['description'];
     isVegan = json['isVegan'];
@@ -30,8 +32,16 @@ class Recipe {
     servings = json['servings'];
     cookTime = json['cookTime'];
     prepTime = json['prepTime'];
-    //instructions = json['instructions'];
-    //ingredients = json['ingredients'];
+
+    var ingredList = json['ingredients'] as List;
+    for (var ingredString in ingredList) {
+      ingredients.add(ingredString);
+    }
+
+    var instrList = json['instructions'] as List;
+    for (var instrString in instrList) {
+      instructions.add(instrString);
+    }
   }
 
 }
