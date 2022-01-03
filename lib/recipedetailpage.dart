@@ -18,10 +18,10 @@ class RecipeDetailPage extends StatelessWidget {
           child: Card(
             child: Column(
               children: <Widget>[
-                ListTile(
-                  title: Text("Title"),
+                /*ListTile(
+                  title: Text("Name"),
                   subtitle: Text(recipe.name.toString()),
-                ),
+                ),*/
                 ListTile(
                   title: Text("Description"),
                   subtitle: Text(recipe.description.toString()),
@@ -46,13 +46,32 @@ class RecipeDetailPage extends StatelessWidget {
                   title: Text("Cooking Time"),
                   subtitle: Text(recipe.cookTime.toString() + " Minutes"),
                 ),
+
                 ListTile(
-                  title: Text("Instructions"),
-                  subtitle: Text(recipe.instructions.toString()),
+                  title: Text("Ingredients")
+                ),
+                ListView.builder(
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: recipe.ingredients.length,
+                  itemBuilder: (context, int index){
+                    return ListTile(
+                      subtitle: Text(recipe.ingredients[index].toString()),
+                    );
+                  },
                 ),
                 ListTile(
-                  title: Text("Instructions"),
-                  subtitle: Text(recipe.ingredients.toString()),
+                  title: Text("Instructions")
+                ),
+                ListView.builder(
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: recipe.instructions.length,
+                  itemBuilder: (context, int index){
+                    return ListTile(
+                      subtitle: Text(recipe.instructions[index].toString()),
+                    );
+                  },
                 ),
               ],
             ),
