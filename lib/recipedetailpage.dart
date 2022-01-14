@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipe.dart';
+import 'package:recipe_app/recipefields.dart';
+import 'package:recipe_app/recipesheetsapi.dart';
+
+import 'httpservice.dart';
 
 class RecipeDetailPage extends StatelessWidget {
   final Recipe recipe;
+  final HttpService httpService = HttpService();
 
-  const RecipeDetailPage({required this.recipe, });
+  RecipeDetailPage({required this.recipe, });
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +78,22 @@ class RecipeDetailPage extends StatelessWidget {
                     );
                   },
                 ),
+                //FloatingActionButton(onPressed: () => httpService.sendPUTrequest()),
+                FloatingActionButton(onPressed: () async {
+                  final recipe = Recipe(
+                    name: 'Burger',
+                    description: 'Desc',
+                    isVegan: false,
+                    isVegetarian: false,
+                    servings: 1,
+                    cookTime: 30,
+                    prepTime: 20,
+                    instructions: ['Do this', 'do that', 'do your mum'],
+                    ingredients: ['Bun', 'Tomato', 'Meat'],
+                  );
+                  await RecipeSheetsApi.insert([recipe.toJson()]);
+
+                })
               ],
             ),
           ),

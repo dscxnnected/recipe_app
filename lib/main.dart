@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:recipe_app/recipelistpage.dart';
+import 'package:recipe_app/recipesheetsapi.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await RecipeSheetsApi.init();
+
   runApp(const MyApp());
 }
 

@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:recipe_app/recipefields.dart';
 
 class Recipe {
+  int? id;
   String name = '';
   String description = '';
   bool isVegan = false;
@@ -12,6 +14,7 @@ class Recipe {
   List<String> instructions = <String>[];
 
   Recipe({
+    this.id,
     required this.name,
     required this.description,
     required this.isVegan,
@@ -24,8 +27,8 @@ class Recipe {
   });
 
   Recipe.fromJson(Map<String, dynamic> json) {
-
-    name = json['title'];
+    id = json['id'];
+    name = json['name'];
     description = json['description'];
     isVegan = json['isVegan'];
     isVegetarian = json['isVegetarian'];
@@ -43,5 +46,22 @@ class Recipe {
       instructions.add(instrString);
     }
   }
+
+  String listToString(List<String> listStr) {
+    return listStr.toString();
+  }
+
+  Map<String, dynamic> toJson() => {
+    RecipeFields.id: id,
+    RecipeFields.name: name,
+    RecipeFields.description: description,
+    RecipeFields.isVegan: isVegan,
+    RecipeFields.isVegetarian: isVegetarian,
+    RecipeFields.servings: servings,
+    RecipeFields.cookTime: cookTime,
+    RecipeFields.prepTime: prepTime,
+    RecipeFields.ingredients: listToString(ingredients),
+    RecipeFields.instructions: listToString(instructions),
+  };
 
 }
