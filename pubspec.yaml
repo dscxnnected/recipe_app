@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.4
+  snippet_coder_utils: ^1.0.8
   gsheets:
 
 
