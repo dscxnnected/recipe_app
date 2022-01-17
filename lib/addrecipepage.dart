@@ -74,7 +74,6 @@ class AddRecipePageState extends State<AddRecipePage> {
                   (onSavedVal) {
                     recipe.name = onSavedVal;
                   },
-                  initialValue: recipe.name ?? "",
                   borderColor: Colors.redAccent,
                   borderFocusColor: Colors.redAccent,
                   borderRadius: 2,
@@ -99,7 +98,6 @@ class AddRecipePageState extends State<AddRecipePage> {
                   (onSavedVal) {
                     recipe.description = onSavedVal;
                   },
-                  initialValue: recipe.description ?? "",
                   borderColor: Colors.redAccent,
                   borderFocusColor: Colors.redAccent,
                   borderRadius: 2,
