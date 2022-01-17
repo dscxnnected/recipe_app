@@ -26,6 +26,7 @@ class Recipe {
     required this.instructions
   });
 
+  //FIXME remove old fromjson method
   Recipe.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -47,8 +48,33 @@ class Recipe {
     }
   }
 
+  static Recipe newfromJson(Map<String, dynamic> json) {
+    return Recipe(
+        id: int.tryParse(json[RecipeFields.id]),
+        name: json[RecipeFields.name],
+        description: json[RecipeFields.description],
+        isVegan: asBool(json[RecipeFields.isVegan]),
+        isVegetarian: asBool(json[RecipeFields.isVegetarian]),
+        servings: int.parse(json[RecipeFields.servings]),
+        cookTime: int.parse(json[RecipeFields.cookTime]),
+        prepTime: int.parse(json[RecipeFields.prepTime]),
+        ingredients: stringToList(json[RecipeFields.ingredients]),
+        instructions: stringToList(json[RecipeFields.instructions])
+    );
+  }
+
+  static List<String> stringToList(String str) {
+    String convStr = str;
+    List<String> list = List.castFrom(convStr.replaceAll(RegExp(r'\[|\]'), "").split(','));
+    return list;
+  }
+
   String listToString(List<String> listStr) {
     return listStr.toString();
+  }
+
+  static bool asBool(String boolStr) {
+    return boolStr.toString().toLowerCase() == 'true';
   }
 
   Map<String, dynamic> toJson() => {
