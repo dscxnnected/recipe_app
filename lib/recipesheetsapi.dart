@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:recipe_app/recipe.dart';
 import 'package:recipe_app/recipefields.dart';
 
 class RecipeSheetsApi {
@@ -53,6 +54,14 @@ class RecipeSheetsApi {
 
     final lastRow = await _recipeSheet!.values.lastRow();
     return lastRow == null ? 0 : int.tryParse(lastRow.first) ?? 0;
+
+  }
+
+  static Future<List<Recipe>> fetchRecipes() async {
+    if (_recipeSheet == null) return <Recipe>[];
+
+    final recipes = await _recipeSheet!.values.map.allRows();
+    return recipes == null ? <Recipe>[] : recipes.map(Recipe.newfromJson).toList();
 
   }
 
