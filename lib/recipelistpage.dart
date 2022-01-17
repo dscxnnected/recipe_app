@@ -3,9 +3,10 @@ import 'package:recipe_app/addrecipepage.dart';
 import 'package:recipe_app/httpservice.dart';
 import 'package:recipe_app/recipe.dart';
 import 'package:recipe_app/recipedetailpage.dart';
+import 'package:recipe_app/recipesheetsapi.dart';
 
 class RecipeListPage extends StatelessWidget {
-  final HttpService httpService = HttpService();
+  //final HttpService httpService = HttpService();
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,21 @@ class RecipeListPage extends StatelessWidget {
         //TODO remove this from app bar
         actions: [
           FloatingActionButton(
+            heroTag: "add",
             child: Icon(Icons.add),
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => AddRecipePage())
-          ))
+          )),
+          FloatingActionButton(
+              heroTag: "refresh",
+              child: Icon(Icons.refresh),
+              //TODO add refresh functionality here - may require conversion to stateful widget? could potentially call rebuild on .pop()
+              onPressed: () => print(RecipeSheetsApi.fetchRecipes())
+          ),
         ],
       ),
       body: FutureBuilder(
-        future: httpService.fetchRecipes(),
+        future: RecipeSheetsApi.fetchRecipes(),
         builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {
           if (snapshot.hasData) {
             List<Recipe>? rec = snapshot.data;
