@@ -243,10 +243,10 @@ class AddRecipePageState extends State<AddRecipePage> {
                 _ingredientsContainer(),
                 _instructionsContainer(),
                 Center(
-                  child: FormHelper.submitButton("Save", () {
+                  child: FormHelper.submitButton("Save", () async {
                     if (validateAndSave()) {
-                      print(recipe.toJson());
-                      //TODO implement adding to google sheets call here via api
+                      final id = await RecipeSheetsApi.getRowCount() + 1;
+                      recipe.id = id;
                       RecipeSheetsApi.insert([recipe.toJson()]);
                       Navigator.of(context).pop();
                     }
